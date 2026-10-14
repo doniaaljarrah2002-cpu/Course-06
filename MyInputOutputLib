@@ -1,0 +1,77 @@
+#pragma once
+#include <iostream>
+#include "MyMathUtilityLib.h"
+using namespace std;
+
+//ReadNumberInRange
+//ReadNumber
+//ReadPositiveNumber
+//ReadEvenNumber
+//ReadOddNumber
+
+namespace MyInputOutputLib
+{
+
+	float ReadNumberInRange(float From, float To,string Message)
+	{
+		float Number = 0;
+		do
+		{
+			cout << Message;
+			cin >> Number;
+
+		} while (Number < From || Number > To);
+
+		return Number;
+	}
+
+
+
+	float ReadNumber(string Message)
+	{
+		float Number;
+		cout << Message;
+		cin >> Number;
+		return Number;
+	}
+
+
+	float ReadPositiveNumber(string Message)
+	{
+		float Number;
+		do
+		{
+			cout << Message;
+			cin >> Number;
+
+		} while (Number <= 0);
+		return Number;
+	}
+
+
+	int ReadEvenNumber(string Message)
+	{
+		int Number;
+		do
+		{
+			cout << Message;
+			cin >> Number;
+
+		} while (!MyMathUtilityLib::IsEven(Number));
+		return Number;
+	}
+
+
+
+	int ReadOddNumber(string Message)
+	{
+		int Number = 0;
+		do
+		{
+			cout << Message;
+			cin >> Number;
+
+		} while (!MyMathUtilityLib::IsOdd(Number));
+		return Number;
+	}
+}
