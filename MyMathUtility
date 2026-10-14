@@ -1,0 +1,175 @@
+#pragma once
+#include <iostream>
+#include "MyInputOutputLib.h"
+using namespace std;
+
+/* 
+   IsEven                    Swap 
+   IsOdd                     MyABS
+   IsPrime                   GetFractionPart
+   IsFactorial               MyRound
+   ReversNumber              MyFloor
+   SumDigit                  MyCeil
+   IsPalindrom               MySqrt
+*/
+
+
+namespace MyMathUtilityLib
+{
+	bool IsEven(int Number)
+	{
+		return Number % 2 == 0;
+	}
+
+	bool IsOdd(int Number)
+	{
+		return Number % 2 != 0;
+	}
+
+	bool IsPrime(int Number)
+	{
+		if (Number <= 1)
+		{
+			return false;
+		}
+
+		for (int i = 2; i <= Number / 2; i++)
+		{
+			if (Number % i == 0)
+			{
+				return false;
+			}
+			return true;
+		}
+	}
+
+
+
+	int IsFactorial(int Number)
+	{
+		if (Number <= 1)
+		{
+			return false;
+		}
+
+		int Sum = 0;
+		for (int i = 1; i <= Number / 2; i++)
+		{
+			if (Number % i == 0)
+			{
+				Sum += i;
+			}
+			return Sum == Number;
+		}
+	}
+
+
+	int ReversNumber(int Number)
+	{
+		int Remainder = 0;
+		int ReversedNumber = 0;
+
+		while (Number > 0)
+		{
+			Remainder = Number % 10;
+			Number = Number / 10;
+			ReversedNumber = ReversedNumber * 10 + Remainder;
+		}
+		return ReversedNumber;
+	}
+
+
+	int SumDigit(int Number)
+	{
+		int Sum = 0;
+		int Remainder = 0;
+
+		while (Number > 0)
+		{
+			Remainder = Number % 10;
+			Number = Number / 10;
+			Sum += Remainder;
+		}
+		return Sum;
+	}
+
+
+	bool IsPalindrom(int Number)
+	{
+		return Number == ReversNumber(Number);
+	}
+
+
+	void Swap(int& Num1, int& Num2)
+	{
+		int Temp;
+		Temp = Num1;
+		Num1 = Num2;
+		Num2 = Temp;
+	}
+
+
+	float MyABS(float Number)
+	{
+		if (Number > 0)
+			return Number;
+		else
+			return Number * -1;
+	}
+
+
+	float GetFractionPart(float Number)
+	{
+		return Number - (int)Number;
+	}
+
+	int MyRound(float Number)
+	{
+		int IntPart;
+		IntPart = int(Number);
+
+
+		float FractionsPart = GetFractionPart(Number);
+
+		if (abs(FractionsPart) >= 0.5)
+		{
+			if (Number > 0)
+				return ++IntPart;
+			else
+				return --IntPart;
+		}
+		else
+		{
+			return IntPart;
+		}
+	}
+
+	int MyFloor(float Number)
+	{
+		if (Number > 0)
+			return (int)Number;
+		else
+			return (int)Number - 1;
+	}
+
+
+	int MyCeil(float Number)
+	{
+		if (abs(GetFractionPart(Number)) > 0)
+		{
+			if (Number > 0)
+				return int(Number) + 1;
+			else
+				return int(Number);
+		}
+		else
+			return Number;
+	}
+
+
+	float MySqrt(int Number)
+	{
+		return pow(Number, 0.5);
+	}
+
+}
