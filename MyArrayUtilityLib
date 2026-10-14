@@ -1,0 +1,191 @@
+#pragma once
+#include <iostream>
+#include "MyInputOutputLib.h"
+#include "MyMathUtilityLib.h"
+#include "MyRandomUtility.h"
+using namespace std;
+
+/*
+  ReadArray                     SumOf2Arrays
+  PrintArray                    CopyArrayInReverseOrder
+  FillArrayWithRandomNumbers    FindNumberPositionInArray
+  MaxNumberInArray              IsNumberInArray
+  MinNumberInArray              AddArrayElement
+  SumArray                      CopyOddNumbers
+  ArrayAverage                  CopyPrimeNumbers
+  CopyArray                     IsPalindromeArray
+*/
+
+namespace MyArrayUtility
+{
+	void ReadArray(int Arr[100] , int &ArrLength)
+	{
+		cout << "\nEnter Number Of Elements : ";
+		cin >> ArrLength;
+
+		cout << "\nEnter Array Elements : ";
+		for (int i = 0; i < ArrLength; i++)
+		{
+			cout << "Element [" << i + 1 << "] : ";
+			cin >> Arr[i];
+		}
+		cout << endl;
+	}
+
+
+	void PrintArray(int Arr[100], int ArrLength)
+	{
+		for (int i = 0; i < ArrLength; i++)
+		{
+			cout << Arr[i] << " ";
+		}
+		cout << endl;
+	}
+
+	void FillArrayWithRandomNumbers(int Arr[100], int ArrLength)
+	{
+		MyRandomUtility::InitializeRandom();
+
+		cout << "\nEnter Number Of Elements : ";
+		cin >> ArrLength;
+
+		for (int i = 0; i < ArrLength; i++)
+		{
+			Arr[i] = MyRandomUtility::RandomNumber(1, 100);
+		}
+	}
+
+
+	int MaxNumberInArray(int Arr[100], int ArrLength)
+	{
+		int Max = 0;
+		for (int i = 0; i < ArrLength; i++)
+		{
+			if (Arr[i] > Max) 
+			{
+				Max = Arr[i];
+			}
+		}
+		return Max;
+	}
+
+
+	int MinNumberInArray(int Arr[100], int ArrLength)
+	{
+		int Min = Arr[0];
+		for (int i = 0; i < ArrLength; i++)
+		{
+			if (Arr[i] < Min)
+			{
+				Min = Arr[i];
+			}
+		}
+		return Min;
+	}
+
+
+
+	int SumArray(int Arr[100], int ArrLength)
+	{
+		int Sum = 0;
+		for (int i = 0; i < ArrLength; i++)
+		{
+			Sum += Arr[i];
+		}
+		return Sum;
+	}
+
+	float ArrayAverage(int Arr[100] , int ArrLength)
+	{
+		return (float)SumArray(Arr, ArrLength) / ArrLength;
+	}
+
+
+	void CopyArray(int ArrSource[100], int ArrDestination[100], int ArrLength)
+	{
+		for (int i = 0; i < ArrLength; i++)
+		{
+			ArrDestination[i] = ArrSource[i];
+		}
+	}
+
+
+	void SumOf2Arrays(int Arr1[100], int Arr2[100], int ArrSum[100], int ArrLength)
+	{
+		for (int i = 0; i < ArrLength; i++)
+		{
+			ArrSum[i] = Arr1[i] + Arr2[i];
+		}
+	}
+
+
+	void CopyArrayInReverseOrder(int ArrSource[100], int ArrDestination[100],
+		int ArrLength)
+	{
+		for (int i = 0; i < ArrLength; i++)
+		{
+			ArrDestination[i] = ArrSource[ArrLength - 1 - i];
+		}
+	}
+
+	short FindNumberPositionInArray(int Number, int Arr[100], int ArrLength)
+	{
+		for (int i = 0; i < ArrLength; i++)
+		{
+			if (Arr[i] == Number) 
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
+
+
+	bool IsNumberInArray(int Number, int Arr[100], int& ArrLength)
+	{
+		return FindNumberPositionInArray(Number, Arr, ArrLength) != -1;
+	}
+
+	void AddArrayElement(int Number, int Arr[100], int& ArrLength)
+	{
+		Arr[ArrLength] = Number;
+	}
+
+
+	void CopyOddNumbers(int ArrSource[100], int ArrDestination[100],
+		int ArrLength, int& ArrDestinationLength)
+	{
+		for (int i = 0; i < ArrLength; i++)
+		{
+			if (ArrSource[i] % 2 != 0)
+			{
+				AddArrayElement(ArrSource[i], ArrDestination, ArrDestinationLength);
+			}
+		}
+	}
+
+	void CopyPrimeNumbers(int ArrSource[100], int ArrDestination[100],
+		int ArrLength, int& ArrDestinationLength)
+	{
+		for (int i = 0; i < ArrLength; i++)
+		{
+			if (MyMathUtilityLib::IsPrime(ArrSource[i]))
+			{
+				AddArrayElement(ArrSource[i], ArrDestination, ArrDestinationLength);
+			}
+		}
+	}
+
+
+	bool IsPalindromeArray(int Arr[100], int ArrLength)
+	{
+		for (int i = 0; i < ArrLength; i++)
+		{
+			if (Arr[i] != Arr[ArrLength - i - 1])
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+}
